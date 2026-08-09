@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALLOY — Men's Jewellery</title>
+<style>
+  :root{
+    --bone:#E8E5DE;
+    --ink:#141414;
+    --noir-bg:#0B0B0C;
+    --noir-fg:#E8E5DE;
+    --oli-bg:#EDE6D3;
+    --oli-fg:#22301F;
+    --oli-gold:#A98D4B;
+    --pop-bg:#FFD84D;
+    --pop-fg:#1A1A1A;
+    --pop-pink:#FF4D8D;
+    --pop-violet:#7A4DFF;
+    --utility:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:Menlo,Consolas,"SF Mono",monospace;
+    --serif:Didot,"Bodoni MT","Bodoni 72",Georgia,serif;
+    --round:"Arial Rounded MT Bold","Helvetica Rounded",Verdana,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    font-family:var(--utility);
+    background:var(--bone);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .micro{
+    font-size:10px;
+    letter-spacing:.38em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+
+  /* ---------- LANDING ---------- */
+  #landing{
+    position:fixed;
+    inset:0;
+    display:flex;
+    flex-direction:column;
+  }
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 24px;
+    background:var(--bone);
+  }
+  .topbar .brand{
+    font-size:12px;
+    letter-spacing:.5em;
+    text-transform:uppercase;
+    font-weight:700;
+  }
+  .topbar .note{opacity:.55}
+  .houses{
+    flex:1;
+    display:flex;
+    min-height:0;
+  }
+  .house{
+    flex:1;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    border:none;
+    outline-offset:-4px;
+    transition:flex .55s cubic-bezier(.7,0,.2,1);
+    overflow:hidden;
+    padding:0;
+  }
+  .house:focus-visible{outline:2px dashed currentColor}
+  .houses:hover .house{flex:.78}
+  .houses:hover .house:hover{flex:1.75}
+  .house .vert{
+    writing-mode:vertical-rl;
+    transform:rotate(180deg);
+    user-select:none;
+    line-height:1;
+    white-space:nowrap;
+  }
+  .house .emblem{
+    position:absolute;
+    top:34px;
+    left:50%;
+    transform:translateX(-50%);
+    opacity:.9;
+  }
+  .house .desc{
+    position:absolute;
+    bottom:36px;
+    left:0;
+    right:0;
+    text-align:center;
+    font-size:10px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    opacity:0;
+    transform:translateY(8px);
+    transition:opacity .4s ease,transform .4s ease;
+    padding:0 16px;
+  }
+  .house:hover .desc,.house:focus-visible .desc{opacity:.85;transform:none}
+  .house .count{
+    position:absolute;
+    bottom:16px;left:0;right:0;
+    text-align:center;
+    font-size:9px;letter-spacing:.3em;
+    opacity:0;
+    transition:opacity .4s ease .1s;
+  }
+  .house:hover .count{opacity:.45}
+
+  #h-noir{background:var(--noir-bg);color:var(--noir-fg)}
+  #h-noir .vert{
+    font-family:var(--utility);
+    font-weight:900;
+    font-size:clamp(56px,9vw,120px);
+    letter-spacing:.04em;
+  }
+  #h-noir .desc{font-family:var(--mono);letter-spacing:.22em}
+
+  #h-oligarch{background:var(--oli-bg);color:var(--oli-fg)}
+  #h-oligarch .vert{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(48px,7.5vw,104px);
+    letter-spacing:.08em;
+  }
+  #h-oligarch .desc{font-family:var(--serif);font-style:italic;text-transform:none;letter-spacing:.08em;font-size:13px}
+
+  #h-pop{background:var(--pop-bg);color:var(--pop-fg)}
+  #h-pop .vert{
+    font-family:var(--round);
+    font-weight:700;
+    font-size:clamp(48px,8vw,110px);
+    letter-spacing:.02em;
+  }
+  #h-pop .desc{font-family:var(--round);letter-spacing:.18em}
+
+  .footbar{
+    padding:14px 24px;
+    text-align:center;
+    background:var(--bone);
+  }
+  .footbar span{opacity:.5}
+
+  /* landing load animation */
+  @media (prefers-reduced-motion:no-preference){
+    .house{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+    #h-oligarch{animation-delay:.12s}
+    #h-pop{animation-delay:.24s}
+    @keyframes rise{from{transform:translateY(24px);opacity:0}to{transform:none;opacity:1}}
+  }
+
+  /* ---------- CATALOGUE ---------- */
+  .catalogue{
+    display:none;
+    min-height:100vh;
+    flex-direction:column;
+  }
+  .catalogue.active{display:flex}
+  body.viewing #landing{display:none}
+
+  .cat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:20px 24px;
+    position:sticky;
+    top:0;
+    z-index:5;
+  }
+  .back{
+    background:none;border:none;cursor:pointer;
+    font:inherit;color:inherit;
+    font-size:10px;letter-spacing:.38em;text-transform:uppercase;
+    padding:6px 0;
+  }
+  .back:hover{opacity:.6}
+  .cat-title-block{
+    text-align:center;
+    padding:8vh 24px 6vh;
+  }
+  .cat-title-block h1{
+    font-size:clamp(40px,7vw,88px);
+    line-height:1;
+    text-wrap:balance;
+  }
+  .cat-title-block p{
+    margin-top:18px;
+    font-size:10px;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    opacity:.55;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:4vw 2vw;
+    padding:0 6vw 12vh;
+    max-width:1200px;
+    margin:0 auto;
+    width:100%;
+  }
+  @media (max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:460px){.grid{grid-template-columns:1fr}}
+  .item{
+    text-align:center;
+    cursor:pointer;
+  }
+  .item svg{
+    width:100%;
+    height:auto;
+    display:block;
+    transition:transform .35s ease;
+  }
+  .item:hover svg{transform:translateY(-6px)}
+  .item .nm{
+    margin-top:14px;
+    font-size:10px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+  }
+  .item .pr{
+    margin-top:6px;
+    font-size:10px;
+    letter-spacing:.2em;
+    opacity:.55;
+    font-variant-numeric:tabular-nums;
+  }
+  .item .add{
+    margin-top:8px;
+    font-size:9px;
+    letter-spacing:.3em;
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+  .item:hover .add{opacity:.8}
+  @media (prefers-reduced-motion:reduce){
+    .item svg,.item:hover svg{transition:none;transform:none}
+  }
+
+  /* NOIR catalogue */
+  #cat-noir{background:var(--noir-bg);color:var(--noir-fg)}
+  #cat-noir .cat-top{background:var(--noir-bg)}
+  #cat-noir h1{font-weight:900;letter-spacing:.02em}
+  #cat-noir .nm,#cat-noir .pr,#cat-noir .add,#cat-noir .cat-title-block p{font-family:var(--mono);letter-spacing:.2em}
+
+  /* OLIGARCH catalogue */
+  #cat-oligarch{background:var(--oli-bg);color:var(--oli-fg)}
+  #cat-oligarch .cat-top{background:var(--oli-bg)}
+  #cat-oligarch h1{font-family:var(--serif);font-weight:400}
+  #cat-oligarch .nm{font-family:var(--serif);font-size:13px;letter-spacing:.12em;text-transform:none;font-style:italic}
+  #cat-oligarch .pr{color:var(--oli-gold);opacity:1}
+
+  /* POP catalogue */
+  #cat-pop{background:#FFF6DC;color:var(--pop-fg)}
+  #cat-pop .cat-top{background:#FFF6DC}
+  #cat-pop h1{font-family:var(--round)}
+  #cat-pop .nm{font-family:var(--round);letter-spacing:.14em}
+  #cat-pop .pr{color:var(--pop-violet);opacity:1}
+  #cat-pop .item:hover .add{color:var(--pop-pink)}
+
+  .cat-foot{
+    margin-top:auto;
+    padding:22px 24px;
+    text-align:center;
+  }
+  .cat-foot span{opacity:.45}
+</style>
+
+<!-- ======================= LANDING ======================= -->
+<main id="landing" aria-label="ALLOY — choose a house">
+  <header class="topbar">
+    <div class="brand">Alloy</div>
+    <div class="micro note">Men's Jewellery — Est. MMXXVI</div>
+  </header>
+
+  <div class="houses">
+    <button class="house" id="h-noir" data-house="noir" aria-label="Enter Noir — dark brutalist geometric">
+      <svg class="emblem" width="26" height="26" viewBox="0 0 26 26" aria-hidden="true">
+        <rect x="3" y="3" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="9" y="9" width="8" height="8" fill="currentColor"/>
+      </svg>
+      <span class="vert">NOIR</span>
+      <span class="desc">dark · brutalist · geometric</span>
+      <span class="count micro">08 objects</span>
+    </button>
+
+    <button class="house" id="h-oligarch" data-house="oligarch" aria-label="Enter Oligarch — old money, symbolic">
+      <svg class="emblem" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="14" cy="14" r="11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <path d="M14 6 L14 22 M8 10 L20 10" stroke="currentColor" stroke-width="1.2" fill="none"/>
+      </svg>
+      <span class="vert">Oligarch</span>
+      <span class="desc">old money, worn quietly</span>
+      <span class="count micro">08 objects</span>
+    </button>
+
+    <button class="house" id="h-pop" data-house="pop" aria-label="Enter Pop Cultural — bubbly, funky, Gen Z">
+      <svg class="emblem" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+        <circle cx="14" cy="14" r="11" fill="none" stroke="currentColor" stroke-width="2"/>
+        <circle cx="10" cy="12" r="1.6" fill="currentColor"/>
+        <circle cx="18" cy="12" r="1.6" fill="currentColor"/>
+        <path d="M9.5 17 Q14 21 18.5 17" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <span class="vert">POP</span>
+      <span class="desc">bubbly · funky · gen z</span>
+      <span class="count micro">08 objects</span>
+    </button>
+  </div>
+
+  <footer class="footbar micro"><span>select a house — ships worldwide — nickel-free alloys</span></footer>
+</main>
+
+<!-- ======================= NOIR ======================= -->
+<section class="catalogue" id="cat-noir" aria-label="Noir catalogue">
+  <div class="cat-top">
+    <button class="back" data-back>&larr; Alloy</button>
+    <div class="micro">House 01 / Noir</div>
+  </div>
+  <div class="cat-title-block">
+    <h1>NOIR</h1>
+    <p>matte black plate · hard geometry · zero ornament</p>
+  </div>
+  <div class="grid" id="grid-noir"></div>
+  <div class="cat-foot micro"><span>gunmetal &amp; rhodium tone alloy — hypoallergenic</span></div>
+</section>
+
+<!-- ======================= OLIGARCH ======================= -->
+<section class="catalogue" id="cat-oligarch" aria-label="Oligarch catalogue">
+  <div class="cat-top">
+    <button class="back" data-back>&larr; Alloy</button>
+    <div class="micro">House 02 / Oligarch</div>
+  </div>
+  <div class="cat-title-block">
+    <h1>Oligarch</h1>
+    <p>heirloom symbols · antique gold tone · quiet power</p>
+  </div>
+  <div class="grid" id="grid-oligarch"></div>
+  <div class="cat-foot micro"><span>18k gold-tone plating over brass alloy</span></div>
+</section>
+
+<!-- ======================= POP ======================= -->
+<section class="catalogue" id="cat-pop" aria-label="Pop Cultural catalogue">
+  <div class="cat-top">
+    <button class="back" data-back>&larr; Alloy</button>
+    <div class="micro">House 03 / Pop</div>
+  </div>
+  <div class="cat-title-block">
+    <h1>POP CULTURAL</h1>
+    <p>enamel drip · candy hardware · main-character energy</p>
+  </div>
+  <div class="grid" id="grid-pop"></div>
+  <div class="cat-foot micro"><span>uv-stable enamel on zinc alloy — wear it loud</span></div>
+</section>
+
+<script>
+/* ---------- product data: each draw() returns inner SVG markup ---------- */
+const VB = '0 0 200 200';
+
+/* NOIR — strokes in bone on black */
+const N = '#E8E5DE';
+const noirItems = [
+  {nm:'SLAB SIGNET', pr:'₹1,499', d:`
+    <circle cx="100" cy="112" r="46" fill="none" stroke="${N}" stroke-width="7"/>
+    <rect x="68" y="52" width="64" height="26" fill="${N}"/>`},
+  {nm:'BOX CHAIN', pr:'₹1,899', d:`
+    ${[0,1,2,3,4].map(i=>`<rect x="${34+i*28}" y="${86+(i%2)*10}" width="24" height="24" fill="none" stroke="${N}" stroke-width="6"/>`).join('')}`},
+  {nm:'HEX PENDANT', pr:'₹1,299', d:`
+    <path d="M100 30 L104 62" stroke="${N}" stroke-width="4"/>
+    <path d="M100 62 L138 84 L138 128 L100 150 L62 128 L62 84 Z" fill="none" stroke="${N}" stroke-width="7"/>
+    <path d="M100 84 L119 95 L119 117 L100 128 L81 117 L81 95 Z" fill="${N}"/>`},
+  {nm:'BAR CUFF', pr:'₹1,699', d:`
+    <path d="M52 130 A48 48 0 1 1 148 130" fill="none" stroke="${N}" stroke-width="9"/>
+    <rect x="40" y="124" width="24" height="12" fill="${N}"/>
+    <rect x="136" y="124" width="24" height="12" fill="${N}"/>`},
+  {nm:'VOID STUD', pr:'₹899', d:`
+    <rect x="70" y="70" width="60" height="60" fill="${N}"/>
+    <rect x="88" y="88" width="24" height="24" fill="#0B0B0C"/>`},
+  {nm:'ANGLE RING', pr:'₹1,399', d:`
+    <path d="M100 52 L146 100 L100 148 L54 100 Z" fill="none" stroke="${N}" stroke-width="7"/>
+    <path d="M100 76 L124 100 L100 124 L76 100 Z" fill="none" stroke="${N}" stroke-width="4"/>`},
+  {nm:'PLATE ID BAND', pr:'₹1,599', d:`
+    <circle cx="100" cy="104" r="44" fill="none" stroke="${N}" stroke-width="6"/>
+    <rect x="58" y="94" width="84" height="20" fill="${N}"/>
+    <rect x="70" y="100" width="60" height="3" fill="#0B0B0C"/>`},
+  {nm:'MONOLITH DROP', pr:'₹1,199', d:`
+    <path d="M100 26 L100 58" stroke="${N}" stroke-width="4"/>
+    <rect x="82" y="58" width="36" height="96" fill="${N}"/>
+    <rect x="82" y="58" width="36" height="96" fill="none" stroke="#0B0B0C" stroke-width="0"/>
+    <rect x="94" y="70" width="12" height="72" fill="#0B0B0C"/>`},
+];
+
+/* OLIGARCH — forest + gold on ivory */
+const G = '#A98D4B', F = '#22301F';
+const oliItems = [
+  {nm:'Sovereign Coin', pr:'₹2,199', d:`
+    <path d="M100 26 L100 52" stroke="${G}" stroke-width="4"/>
+    <circle cx="100" cy="108" r="54" fill="none" stroke="${G}" stroke-width="6"/>
+    <circle cx="100" cy="108" r="42" fill="none" stroke="${G}" stroke-width="2"/>
+    <text x="100" y="126" text-anchor="middle" font-family="Didot,Georgia,serif" font-size="52" fill="${F}">A</text>`},
+  {nm:'Crest Signet', pr:'₹1,999', d:`
+    <circle cx="100" cy="116" r="42" fill="none" stroke="${F}" stroke-width="7"/>
+    <path d="M74 50 L126 50 L126 82 L100 98 L74 82 Z" fill="${G}"/>
+    <path d="M100 58 L100 88 M86 66 L114 66" stroke="${F}" stroke-width="4"/>`},
+  {nm:'Laurel Medallion', pr:'₹2,499', d:`
+    <path d="M100 28 L100 54" stroke="${G}" stroke-width="4"/>
+    <circle cx="100" cy="112" r="50" fill="none" stroke="${F}" stroke-width="5"/>
+    ${[...Array(8)].map((_,i)=>{const a=(i/8)*Math.PI*2;const x=100+Math.cos(a)*38,y=112+Math.sin(a)*38;return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${G}"/>`}).join('')}
+    <text x="100" y="128" text-anchor="middle" font-family="Didot,Georgia,serif" font-size="44" font-style="italic" fill="${F}">O</text>`},
+  {nm:'The Serpent Band', pr:'₹1,799', d:`
+    <circle cx="100" cy="104" r="44" fill="none" stroke="${G}" stroke-width="8"/>
+    <circle cx="100" cy="60" r="10" fill="${F}"/>
+    <circle cx="97" cy="58" r="1.8" fill="${G}"/>
+    <circle cx="103" cy="58" r="1.8" fill="${G}"/>`},
+  {nm:'Estate Key', pr:'₹1,899', d:`
+    <path d="M100 24 L100 44" stroke="${G}" stroke-width="4"/>
+    <circle cx="100" cy="72" r="26" fill="none" stroke="${G}" stroke-width="7"/>
+    <rect x="94" y="96" width="12" height="72" fill="${G}"/>
+    <rect x="106" y="140" width="18" height="10" fill="${G}"/>
+    <rect x="106" y="156" width="12" height="10" fill="${G}"/>`},
+  {nm:'Cameo Oval', pr:'₹2,299', d:`
+    <path d="M100 26 L100 50" stroke="${G}" stroke-width="4"/>
+    <ellipse cx="100" cy="110" rx="42" ry="56" fill="none" stroke="${G}" stroke-width="6"/>
+    <ellipse cx="100" cy="110" rx="30" ry="44" fill="${F}"/>
+    <circle cx="100" cy="96" r="10" fill="${G}" opacity=".85"/>
+    <path d="M84 138 Q100 116 116 138" fill="${G}" opacity=".85"/>`},
+  {nm:'Rope Chain', pr:'₹2,099', d:`
+    ${[0,1,2,3,4,5].map(i=>`<circle cx="${40+i*24}" cy="${100+Math.round(Math.sin(i*1.1)*12)}" r="13" fill="none" stroke="${G}" stroke-width="6"/>`).join('')}`},
+  {nm:'Double-Headed Pin', pr:'₹1,599', d:`
+    <path d="M100 160 L100 70" stroke="${F}" stroke-width="5"/>
+    <path d="M100 70 L72 46 L84 74 Z" fill="${G}"/>
+    <path d="M100 70 L128 46 L116 74 Z" fill="${G}"/>
+    <circle cx="100" cy="70" r="8" fill="${F}"/>`},
+];
+
+/* POP — candy colors on cream */
+const PK='#FF4D8D', VI='#7A4DFF', YL='#FFC93C', GR='#35C56E', BK='#1A1A1A';
+const popItems = [
+  {nm:'ACID SMILEY', pr:'₹999', d:`
+    <path d="M100 24 L100 48" stroke="${BK}" stroke-width="5"/>
+    <circle cx="100" cy="106" r="52" fill="${YL}" stroke="${BK}" stroke-width="6"/>
+    <circle cx="84" cy="96" r="7" fill="${BK}"/>
+    <circle cx="116" cy="96" r="7" fill="${BK}"/>
+    <path d="M78 120 Q100 142 122 120" stroke="${BK}" stroke-width="6" fill="none" stroke-linecap="round"/>`},
+  {nm:'BOLT DROP', pr:'₹899', d:`
+    <path d="M100 22 L100 42" stroke="${BK}" stroke-width="5"/>
+    <path d="M112 42 L74 108 L98 108 L84 168 L128 92 L104 92 L118 42 Z" fill="${PK}" stroke="${BK}" stroke-width="5" stroke-linejoin="round"/>`},
+  {nm:'BUBBLE CHAIN', pr:'₹1,299', d:`
+    <circle cx="42" cy="104" r="14" fill="${VI}"/>
+    <circle cx="72" cy="94" r="18" fill="${PK}"/>
+    <circle cx="106" cy="106" r="22" fill="${YL}" stroke="${BK}" stroke-width="4"/>
+    <circle cx="142" cy="94" r="16" fill="${GR}"/>
+    <circle cx="168" cy="106" r="11" fill="${BK}"/>`},
+  {nm:'LUCKY DICE', pr:'₹1,099', d:`
+    <path d="M100 24 L100 46" stroke="${BK}" stroke-width="5"/>
+    <rect x="62" y="52" width="76" height="76" rx="16" fill="${VI}" stroke="${BK}" stroke-width="5"/>
+    <circle cx="84" cy="74" r="7" fill="#FFF6DC"/>
+    <circle cx="116" cy="74" r="7" fill="#FFF6DC"/>
+    <circle cx="100" cy="90" r="7" fill="#FFF6DC"/>
+    <circle cx="84" cy="106" r="7" fill="#FFF6DC"/>
+    <circle cx="116" cy="106" r="7" fill="#FFF6DC"/>`},
+  {nm:'STAR STACK RING', pr:'₹799', d:`
+    <circle cx="100" cy="112" r="42" fill="none" stroke="${BK}" stroke-width="7"/>
+    <path d="M100 34 L110 60 L138 60 L116 78 L124 106 L100 88 L76 106 L84 78 L62 60 L90 60 Z" fill="${YL}" stroke="${BK}" stroke-width="4" stroke-linejoin="round" transform="translate(0,8) scale(.82) translate(22,10)"/>`},
+  {nm:'YIN-YANG SPINNER', pr:'₹949', d:`
+    <path d="M100 24 L100 46" stroke="${BK}" stroke-width="5"/>
+    <circle cx="100" cy="104" r="50" fill="#FFF6DC" stroke="${BK}" stroke-width="5"/>
+    <path d="M100 54 A50 50 0 0 1 100 154 A25 25 0 0 1 100 104 A25 25 0 0 0 100 54 Z" fill="${BK}"/>
+    <circle cx="100" cy="79" r="7" fill="#FFF6DC"/>
+    <circle cx="100" cy="129" r="7" fill="${BK}"/>`},
+  {nm:'GAME OVER TAG', pr:'₹1,199', d:`
+    <path d="M100 26 L100 48" stroke="${BK}" stroke-width="5"/>
+    <rect x="48" y="60" width="104" height="60" rx="12" fill="${GR}" stroke="${BK}" stroke-width="5"/>
+    <rect x="64" y="78" width="10" height="24" fill="${BK}"/>
+    <rect x="57" y="85" width="24" height="10" fill="${BK}"/>
+    <circle cx="118" cy="82" r="6" fill="${BK}"/>
+    <circle cx="134" cy="96" r="6" fill="${BK}"/>`},
+  {nm:'FLAME HOOP', pr:'₹849', d:`
+    <circle cx="100" cy="110" r="44" fill="none" stroke="${VI}" stroke-width="9"/>
+    <path d="M100 44 Q114 62 104 74 Q120 70 118 88 Q108 82 100 92 Q92 82 82 88 Q80 70 96 74 Q86 62 100 44 Z" fill="${PK}" stroke="${BK}" stroke-width="4" stroke-linejoin="round"/>`},
+];
+
+/* ---------- render ---------- */
+function render(gridId, items){
+  const grid = document.getElementById(gridId);
+  grid.innerHTML = items.map(it=>`
+    <div class="item" role="button" tabindex="0" aria-label="${it.nm} — ${it.pr}">
+      <svg viewBox="${VB}" aria-hidden="true">${it.d}</svg>
+      <div class="nm">${it.nm}</div>
+      <div class="pr">${it.pr}</div>
+      <div class="add">add to bag +</div>
+    </div>`).join('');
+}
+render('grid-noir', noirItems);
+render('grid-oligarch', oliItems);
+render('grid-pop', popItems);
+
+/* ---------- hash routing ---------- */
+const HOUSES = ['noir','oligarch','pop'];
+function show(house){
+  document.querySelectorAll('.catalogue').forEach(c=>c.classList.remove('active'));
+  if(house && HOUSES.includes(house)){
+    document.body.classList.add('viewing');
+    document.getElementById('cat-'+house).classList.add('active');
+    window.scrollTo(0,0);
+  }else{
+    document.body.classList.remove('viewing');
+  }
+}
+document.querySelectorAll('.house').forEach(b=>{
+  b.addEventListener('click',()=>{ location.hash = b.dataset.house; });
+});
+document.querySelectorAll('[data-back]').forEach(b=>{
+  b.addEventListener('click',()=>{ location.hash = ''; });
+});
+window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
+show(location.hash.slice(1));
+</script>
+
+</html>
