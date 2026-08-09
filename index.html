@@ -251,7 +251,16 @@
 
   /* NOIR catalogue */
   #cat-noir{background:var(--noir-bg);color:var(--noir-fg)}
-  #cat-noir .cat-top{background:var(--noir-bg)}
+  #cat-noir .cat-top{background:rgba(11,11,12,.82);backdrop-filter:blur(2px)}
+  #noir-ring{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    z-index:0;
+    pointer-events:none;
+  }
+  #cat-noir > :not(#noir-ring){position:relative;z-index:1}
   #cat-noir h1{font-weight:900;letter-spacing:.02em}
   #cat-noir .nm,#cat-noir .pr,#cat-noir .add,#cat-noir .cat-title-block p{font-family:var(--mono);letter-spacing:.2em}
 
@@ -324,6 +333,7 @@
 
 <!-- ======================= NOIR ======================= -->
 <section class="catalogue" id="cat-noir" aria-label="Noir catalogue">
+  <canvas id="noir-ring" aria-hidden="true"></canvas>
   <div class="cat-top">
     <button class="back" data-back>&larr; Alloy</button>
     <div class="micro">House 01 / Noir</div>
@@ -526,6 +536,104 @@ document.querySelectorAll('[data-back]').forEach(b=>{
 });
 window.addEventListener('hashchange',()=>show(location.hash.slice(1)));
 show(location.hash.slice(1));
+
+/* ---------- Noir background: tumbling chrome ring ---------- */
+(function(){
+  const cv = document.getElementById('noir-ring');
+  const ctx = cv.getContext('2d');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const noirCat = document.getElementById('cat-noir');
+  let dpr = 1;
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width  = Math.round(innerWidth * dpr);
+    cv.height = Math.round(innerHeight * dpr);
+    drawnStatic = false;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  // chrome band: alternating light/dark stops read as polished metal
+  function chromeGradient(angle){
+    if (!ctx.createConicGradient){
+      const g = ctx.createLinearGradient(-300,-300,300,300);
+      g.addColorStop(0,'#f4f4f4'); g.addColorStop(.5,'#4d4d4f'); g.addColorStop(1,'#dedede');
+      return g;
+    }
+    const g = ctx.createConicGradient(angle, 0, 0);
+    const stops = [
+      [0.00,'#fafafa'],[0.07,'#c9c9cc'],[0.14,'#59595c'],[0.22,'#e9e9ec'],
+      [0.31,'#8a8a8e'],[0.40,'#2e2e30'],[0.48,'#d6d6d9'],[0.57,'#f6f6f6'],
+      [0.66,'#6f6f73'],[0.75,'#232325'],[0.84,'#bfbfc3'],[0.93,'#ececef'],[1.00,'#fafafa']
+    ];
+    stops.forEach(([p,c])=>g.addColorStop(p,c));
+    return g;
+  }
+
+  function drawRing(t){
+    const w = cv.width, h = cv.height;
+    ctx.clearRect(0,0,w,h);
+
+    const cx = w/2, cy = h*0.45;
+    const R    = Math.min(w,h)*0.34;
+    const tube = R*0.30;
+    const tilt = 0.42 + 0.22*Math.sin(t*0.6);   // slow tumble
+    const spin = Math.sin(t*0.35)*0.4;          // gentle sway
+
+    ctx.save();
+    ctx.globalAlpha = 0.5;
+    ctx.translate(cx,cy);
+    ctx.rotate(spin);
+    ctx.scale(1,tilt);
+
+    // back rim shadow for depth
+    ctx.lineWidth = tube*1.18;
+    ctx.strokeStyle = 'rgba(0,0,0,.55)';
+    ctx.beginPath(); ctx.arc(0,6*dpr,R,0,Math.PI*2); ctx.stroke();
+
+    // main chrome band, sheen sweeps as the gradient angle advances
+    ctx.lineWidth = tube;
+    ctx.strokeStyle = chromeGradient(t*0.8);
+    ctx.beginPath(); ctx.arc(0,0,R,0,Math.PI*2); ctx.stroke();
+
+    // bright outer edge highlight
+    ctx.lineWidth = Math.max(2*dpr, tube*0.05);
+    ctx.strokeStyle = 'rgba(255,255,255,.85)';
+    ctx.beginPath(); ctx.arc(0,0,R+tube/2,0,Math.PI*2); ctx.stroke();
+
+    // dark inner bore
+    ctx.lineWidth = Math.max(2*dpr, tube*0.07);
+    ctx.strokeStyle = 'rgba(10,10,10,.9)';
+    ctx.beginPath(); ctx.arc(0,0,R-tube/2,0,Math.PI*2); ctx.stroke();
+    ctx.restore();
+
+    // floor shadow
+    ctx.save();
+    ctx.globalAlpha = 0.35;
+    ctx.translate(cx, cy + R*tilt + tube*0.9);
+    ctx.scale(1,0.18);
+    const sh = ctx.createRadialGradient(0,0,0,0,0,R*1.1);
+    sh.addColorStop(0,'rgba(0,0,0,.9)');
+    sh.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle = sh;
+    ctx.beginPath(); ctx.arc(0,0,R*1.1,0,Math.PI*2); ctx.fill();
+    ctx.restore();
+  }
+
+  let t = 0, drawnStatic = false;
+  function loop(){
+    requestAnimationFrame(loop);
+    if(!noirCat.classList.contains('active')) return;   // idle when Noir is closed
+    if(reduced){
+      if(!drawnStatic){ drawRing(1.2); drawnStatic = true; }
+      return;
+    }
+    t += 0.008;
+    drawRing(t);
+  }
+  loop();
+})();
 </script>
 
 </html>
