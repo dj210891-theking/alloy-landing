@@ -3,288 +3,415 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TSBM — Brand Personality</title>
+<title>The Space Between Matter — 3 Design Directions</title>
 <style>
-  :root{
-    --void:#0A0B0D;
-    --bone:#E9E6DF;
-    --chrome:#C9C9CE;
-    --dim:rgba(233,230,223,.5);
-    --hair:rgba(233,230,223,.14);
-    --utility:"Helvetica Neue",Helvetica,Arial,sans-serif;
-    --mono:Menlo,Consolas,"SF Mono",monospace;
-  }
   *{margin:0;padding:0;box-sizing:border-box}
   body{
-    background:var(--void);
-    color:var(--bone);
-    font-family:var(--utility);
+    background:#111;
+    color:#fff;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
-  .micro{font-size:10px;letter-spacing:.34em;text-transform:uppercase;font-weight:500}
-  .page{max-width:860px;margin:0 auto;padding:0 28px}
-
-  header.masthead{
+  .intro{
     text-align:center;
-    padding:14vh 28px 10vh;
-    border-bottom:1px solid var(--hair);
+    padding:12vh 24px 10vh;
+    background:#111;
   }
-  .gap-symbol{margin:0 auto 44px;display:block}
-  h1.wordmark{
-    font-size:clamp(26px,4.6vw,44px);
-    font-weight:700;
-    letter-spacing:.34em;
-    text-transform:uppercase;
-    line-height:1.7;
+  .intro .k{font-size:10px;letter-spacing:.4em;text-transform:uppercase;opacity:.5;margin-bottom:26px}
+  .intro h1{font-size:clamp(24px,3.6vw,40px);font-weight:700;letter-spacing:.06em;text-wrap:balance}
+  .intro p{margin-top:20px;font-size:13px;letter-spacing:.14em;opacity:.6;line-height:2}
+  .dir-tag{
+    position:sticky;top:0;z-index:9;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:14px 22px;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    backdrop-filter:blur(6px);
+  }
+
+  /* ============ DIRECTION A — VULCAN (cinematic luxury) ============ */
+  .dA{background:#141110;color:#F2EBDD;font-family:Georgia,"Times New Roman",serif}
+  .dA .dir-tag{background:rgba(20,17,16,.85);color:#C9973F;border-bottom:1px solid rgba(201,151,63,.25);font-family:"Helvetica Neue",Arial,sans-serif}
+  .dA-hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:10vh 24px;
+    background:
+      radial-gradient(ellipse 60% 45% at 50% 38%, rgba(201,151,63,.16), transparent 70%),
+      radial-gradient(ellipse 90% 70% at 50% 110%, #060404 40%, transparent 100%),
+      #141110;
+    overflow:hidden;
+  }
+  .dA-seal{margin-bottom:44px}
+  .dA-hero h2{
+    font-size:clamp(38px,6vw,84px);
+    font-weight:400;
+    letter-spacing:.04em;
+    line-height:1.12;
     text-wrap:balance;
   }
-  .masthead .sub{margin-top:26px;color:var(--dim)}
+  .dA-hero h2 em{font-style:italic;color:#C9973F}
+  .dA-hero .sub{
+    margin-top:26px;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:rgba(242,235,221,.55);
+  }
+  .dA-ring{margin:7vh auto 0;display:block;filter:drop-shadow(0 30px 50px rgba(0,0,0,.7))}
+  .dA-row{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    max-width:1100px;margin:0 auto;padding:0 24px 12vh;gap:40px;
+  }
+  .dA-card{text-align:center}
+  .dA-card .frame{
+    border:1px solid rgba(201,151,63,.3);
+    padding:44px 20px;
+    background:linear-gradient(180deg,#1A1614,#0D0B0A);
+  }
+  .dA-card .nm{margin-top:20px;font-size:17px;font-style:italic;letter-spacing:.06em}
+  .dA-card .pr{margin-top:8px;font-family:"Helvetica Neue",Arial,sans-serif;font-size:10px;letter-spacing:.3em;color:#C9973F}
+  .dA-meta{
+    display:flex;justify-content:center;gap:14px;flex-wrap:wrap;
+    padding:0 24px 12vh;
+  }
+  .chip{width:74px;text-align:center;font-family:"Helvetica Neue",Arial,sans-serif;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+  .chip .c{height:44px;margin-bottom:8px;border:1px solid rgba(255,255,255,.14)}
 
-  section{padding:9vh 0;border-bottom:1px solid var(--hair)}
-  .sec-head{
-    display:flex;align-items:baseline;gap:18px;
-    margin-bottom:44px;
+  /* ============ DIRECTION B — STATIC (streetwear) ============ */
+  .dB{background:#0D0D0D;color:#FFF;font-family:Impact,"Arial Black","Helvetica Neue",sans-serif}
+  .dB .dir-tag{background:rgba(13,13,13,.85);color:#FF3B1F;border-bottom:2px solid #FF3B1F;font-family:"Helvetica Neue",Arial,sans-serif}
+  .dB-hero{
+    position:relative;
+    min-height:92vh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:12vh 5vw;
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(0deg, transparent 0 46px, rgba(255,255,255,.035) 46px 47px),
+      #0D0D0D;
   }
-  .sec-head .no{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.2em}
-  .sec-head h2{
-    font-size:13px;letter-spacing:.4em;text-transform:uppercase;font-weight:700;
+  .dB-hero h2{
+    font-size:clamp(56px,11vw,170px);
+    line-height:.88;
+    text-transform:uppercase;
+    letter-spacing:.01em;
+    font-weight:400;
   }
-  p.lead{
-    font-size:clamp(16px,1.9vw,20px);
-    line-height:1.8;font-weight:300;color:#CFCCC5;
-    max-width:58ch;
+  .dB-hero h2 .hollow{
+    color:transparent;
+    -webkit-text-stroke:2.5px #fff;
   }
-  p.lead strong{color:var(--bone);font-weight:600}
-  .kv{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-    gap:1px;
-    background:var(--hair);
-    border:1px solid var(--hair);
-    margin-top:40px;
+  .dB-hero h2 .red{color:#FF3B1F}
+  .dB-stamp{
+    position:absolute;
+    top:16vh;right:6vw;
+    transform:rotate(8deg);
+    background:#FF3B1F;color:#0D0D0D;
+    font-size:13px;letter-spacing:.12em;
+    padding:10px 16px;
+    box-shadow:6px 6px 0 #fff;
   }
-  .kv .cell{background:var(--void);padding:26px 22px}
-  .kv .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
-  .kv .v{font-size:15px;line-height:1.55;font-weight:300}
-  .kv .v em{font-style:normal;color:var(--chrome)}
-
-  /* voice samples */
-  .voice-demo{
-    margin-top:40px;
-    border:1px solid var(--hair);
-    padding:54px 30px;
+  .dB-hero .bar{
+    margin-top:5vh;
+    display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+    font-family:"Helvetica Neue",Arial,sans-serif;
+    font-size:11px;letter-spacing:.28em;font-weight:700;
+  }
+  .dB-hero .bar .dotline{flex:1;min-width:120px;height:2px;background:repeating-linear-gradient(90deg,#fff 0 10px,transparent 10px 18px)}
+  .dB-marquee{
+    border-top:2px solid #fff;border-bottom:2px solid #fff;
+    overflow:hidden;white-space:nowrap;
+    padding:12px 0;
+    font-size:20px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .dB-marquee .track{display:inline-block;padding-right:50px}
+  @media (prefers-reduced-motion:no-preference){
+    .dB-marquee .track{animation:mq 18s linear infinite}
+    @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  }
+  .dB-row{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;max-width:1100px;margin:0 auto;padding:10vh 24px 12vh;
+  }
+  .dB-card{
+    background:#fff;color:#0D0D0D;
+    padding:26px 18px 22px;
     text-align:center;
+    transform:rotate(-1.2deg);
+    box-shadow:8px 8px 0 #FF3B1F;
   }
-  .voice-demo .obj{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--dim);margin-bottom:34px}
-  .voice-demo .line{font-size:clamp(16px,2vw,21px);font-weight:300;letter-spacing:.04em;line-height:2}
-  .voice-demo .price{margin-top:34px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--dim)}
-  .lex{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:40px}
-  .lex .col{background:var(--void);padding:26px 22px}
-  .lex ul{list-style:none;margin-top:14px}
-  .lex li{font-size:14px;font-weight:300;padding:7px 0;border-bottom:1px dashed var(--hair)}
-  .lex li:last-child{border:none}
-  .lex .never li{color:var(--dim);text-decoration:line-through;text-decoration-color:rgba(233,230,223,.4)}
+  .dB-card:nth-child(2){transform:rotate(1.4deg)}
+  .dB-card:nth-child(3){transform:rotate(-.6deg)}
+  .dB-card .nm{font-size:22px;text-transform:uppercase;margin-top:16px}
+  .dB-card .pr{font-family:"Helvetica Neue",Arial,sans-serif;font-weight:700;font-size:12px;letter-spacing:.2em;margin-top:6px}
+  .dB-card .tag{font-family:"Helvetica Neue",Arial,sans-serif;font-size:9px;letter-spacing:.3em;background:#0D0D0D;color:#fff;display:inline-block;padding:4px 10px;margin-top:12px}
 
-  /* palette */
-  .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:40px}
-  .sw{background:var(--void);padding:0}
-  .sw .chip{height:130px}
-  .sw .meta{padding:18px 20px}
-  .sw .nm{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
-  .sw .hx{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:8px;letter-spacing:.14em}
-  .sw .use{font-size:12px;font-weight:300;color:var(--dim);margin-top:10px;line-height:1.6}
-  .chip.c-void{background:#0A0B0D;border-bottom:1px solid var(--hair)}
-  .chip.c-bone{background:#E9E6DF}
-  .chip.c-chrome{background:linear-gradient(135deg,#F4F4F8 0%,#9a9aa2 40%,#5E5E66 55%,#E6E6EC 75%,#8E8E97 100%)}
-  .rule-line{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--dim);line-height:2}
+  /* ============ DIRECTION C — ATELIER (modern luxury e-com) ============ */
+  .dC{background:#F5F1EA;color:#2A2724;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .dC .dir-tag{background:rgba(245,241,234,.85);color:#2A2724;border-bottom:1px solid rgba(42,39,36,.12)}
+  .dC-hero{
+    min-height:88vh;
+    display:grid;grid-template-columns:1fr 1fr;
+    max-width:1200px;margin:0 auto;padding:8vh 24px;
+    align-items:center;gap:5vw;
+  }
+  .dC-hero .copy .lg{
+    font-size:13px;letter-spacing:.5em;text-transform:uppercase;font-weight:700;
+    margin-bottom:34px;
+  }
+  .dC-hero .copy .lg span{color:#8C7B5A}
+  .dC-hero h2{
+    font-size:clamp(32px,4.4vw,58px);
+    font-weight:300;line-height:1.18;letter-spacing:-.01em;
+    text-wrap:balance;
+  }
+  .dC-hero .copy p{
+    margin-top:24px;font-size:15px;font-weight:300;line-height:1.8;color:#6B645B;max-width:44ch;
+  }
+  .dC-cta{
+    margin-top:38px;display:flex;gap:14px;flex-wrap:wrap;
+  }
+  .dC-cta .btn{
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600;
+    padding:16px 30px;border:1px solid #2A2724;
+    background:#2A2724;color:#F5F1EA;cursor:pointer;
+  }
+  .dC-cta .btn.ghost{background:transparent;color:#2A2724}
+  .dC-hero .visual{
+    background:#ECE6DB;
+    border-radius:4px;
+    display:flex;align-items:center;justify-content:center;
+    padding:8vh 20px;
+  }
+  .dC-row{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:28px;max-width:1200px;margin:0 auto;padding:4vh 24px 8vh;
+  }
+  .dC-card{background:#fff;border-radius:4px;overflow:hidden;transition:box-shadow .3s ease}
+  .dC-card:hover{box-shadow:0 18px 44px rgba(42,39,36,.12)}
+  .dC-card .ph{background:#ECE6DB;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+  .dC-card .info{padding:18px 20px 22px}
+  .dC-card .nm{font-size:14px;font-weight:500;letter-spacing:.02em}
+  .dC-card .ds{font-size:12px;color:#8B8378;margin-top:4px;font-weight:300}
+  .dC-card .pr{font-size:13px;font-weight:600;margin-top:10px}
+  .dC-strip{
+    text-align:center;padding:0 24px 10vh;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#8B8378;
+  }
 
-  /* logo section */
-  .logo-stage{
-    margin-top:40px;
-    border:1px solid var(--hair);
-    display:grid;
-    grid-template-columns:1fr 1fr;
+  /* ============ chooser footer ============ */
+  .choose{
+    background:#111;color:#fff;text-align:center;
+    padding:12vh 24px 14vh;
   }
-  .logo-stage .cellL{padding:64px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;border-right:1px solid var(--hair)}
-  .logo-stage .cellR{padding:64px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;background:var(--bone);color:var(--void)}
-  .logo-stage .cap{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;opacity:.55}
-  .lockup{
-    font-size:15px;font-weight:700;letter-spacing:.42em;text-transform:uppercase;
-    text-align:center;line-height:2.1;
+  .choose h3{font-size:clamp(20px,2.6vw,30px);font-weight:700;letter-spacing:.04em}
+  .choose p{margin-top:16px;font-size:12px;letter-spacing:.2em;opacity:.6;line-height:2}
+  .choose .opts{display:flex;gap:16px;justify-content:center;margin-top:36px;flex-wrap:wrap}
+  .choose .opt{
+    border:1px solid rgba(255,255,255,.3);
+    padding:18px 26px;font-size:11px;letter-spacing:.26em;text-transform:uppercase;
   }
-  @media (max-width:640px){
-    .logo-stage{grid-template-columns:1fr}
-    .logo-stage .cellL{border-right:none;border-bottom:1px solid var(--hair)}
-    .lex{grid-template-columns:1fr}
-    .swatches{grid-template-columns:1fr}
+  @media (max-width:840px){
+    .dA-row,.dB-row,.dC-row{grid-template-columns:1fr;max-width:440px}
+    .dC-hero{grid-template-columns:1fr;min-height:auto}
   }
-
-  /* type section */
-  .type-demo{margin-top:40px;border:1px solid var(--hair);padding:50px 30px;text-align:center}
-  .type-demo .big{
-    font-size:clamp(30px,5.4vw,58px);
-    font-weight:700;letter-spacing:.22em;text-transform:uppercase;line-height:1.5;
-  }
-  .type-demo .note{margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--dim);line-height:2}
-
-  footer{padding:10vh 28px 12vh;text-align:center}
-  footer .essence{
-    font-size:clamp(17px,2.2vw,24px);
-    font-weight:300;line-height:1.9;max-width:34ch;margin:0 auto;
-  }
-  footer .sig{margin-top:44px;color:var(--dim)}
 </style>
 
-<header class="masthead">
-  <!-- the gap symbol: two masses that never touch -->
-  <svg class="gap-symbol" width="120" height="56" viewBox="0 0 120 56" aria-label="Logo: two circles almost touching">
-    <circle cx="34" cy="28" r="17" fill="#E9E6DF"/>
-    <circle cx="86" cy="28" r="17" fill="none" stroke="#E9E6DF" stroke-width="2.5"/>
-  </svg>
-  <h1 class="wordmark">The Sp&Lambda;ce<br>Between<br>M&Lambda;tter</h1>
-  <div class="sub micro">Brand Personality &mdash; Working Document 01 &mdash; MMXXVI</div>
+<header class="intro">
+  <div class="k">The Space Between Matter</div>
+  <h1>One name. Three different brands.</h1>
+  <p>Scroll through all three worlds, then pick at the bottom.<br>Everything — logo, color, type, attitude — rebuilds around your choice.</p>
 </header>
 
-<div class="page">
-
-  <section>
-    <div class="sec-head"><span class="no">01</span><h2>Who He Is</h2></div>
-    <p class="lead">The brand is <strong>a Magician</strong> — he transforms base metal into meaning, the ordinary into the significant. He walks into the room and says almost nothing, yet <strong>the room slowly reorients around him</strong>. He is cold on the surface, mysterious by discipline — he never explains himself fully, and this is precisely why people lean in. And beneath the stillness he is <strong>an instigator</strong>: every object he hands you is a dare. <em>Wear it and start something.</em></p>
-    <div class="kv">
-      <div class="cell"><div class="k">Archetype</div><div class="v">The Magician <em>— transformation as power</em></div></div>
-      <div class="cell"><div class="k">Presence</div><div class="v">Magnetic center <em>— gravity, not volume</em></div></div>
-      <div class="cell"><div class="k">Temperature</div><div class="v">Cold &amp; mysterious <em>— never fully explained</em></div></div>
-      <div class="cell"><div class="k">Stance toward you</div><div class="v">The instigator <em>— objects as dares</em></div></div>
-      <div class="cell"><div class="k">Era</div><div class="v">Ancient-future <em>— relic and laboratory at once; never trendy</em></div></div>
-      <div class="cell"><div class="k">Never</div><div class="v">Loud, needy, apologetic, nostalgic, "on trend"</div></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="no">02</span><h2>How He Speaks</h2></div>
-    <p class="lead"><strong>The whisper.</strong> Minimal words surrounded by silence — because a brand about the space between matter speaks mostly in space. Short declaratives. No exclamation marks, ever. The provocation lives inside quiet sentences, not loud ones.</p>
-    <div class="voice-demo">
-      <div class="obj">OBJECT 02 — PENDANT</div>
-      <div class="line">Zinc alloy. Chrome plate.<br>The rest is up to you.</div>
-      <div class="price">₹1,499 — ADD</div>
-    </div>
-    <div class="lex">
-      <div class="col">
-        <div class="micro">Words we use</div>
-        <ul>
-          <li>object &nbsp;<span style="opacity:.45">(never "piece")</span></li>
-          <li>vessel · vault · keeper</li>
-          <li>honest alloy · plate · cast · blackened</li>
-          <li>the gap · the interval · the space</li>
-          <li>meaning · matter · mass</li>
-        </ul>
-      </div>
-      <div class="col never">
-        <div class="micro">Words we never use</div>
-        <ul>
-          <li>bling · swag · drip</li>
-          <li>luxury (we imply it)</li>
-          <li>imitation · fake-gold finish</li>
-          <li>sale!! · hurry · last chance</li>
-          <li>premium quality</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="no">03</span><h2>Color</h2></div>
-    <p class="lead"><strong>Pure monochrome. No accent. Ever.</strong> Three non-colors, disciplined absolutely — because color is noise, and the brand is a whisper. When people see uninterrupted black, bone, and chrome, they should know whose room they're standing in.</p>
-    <div class="swatches">
-      <div class="sw">
-        <div class="chip c-void"></div>
-        <div class="meta">
-          <div class="nm">Void</div>
-          <div class="hx">#0A0B0D</div>
-          <div class="use">The ground. 80% of every surface — packaging, site, film. Matte, light-absorbing.</div>
-        </div>
-      </div>
-      <div class="sw">
-        <div class="chip c-bone"></div>
-        <div class="meta">
-          <div class="nm">Bone</div>
-          <div class="hx">#E9E6DF</div>
-          <div class="use">The voice. All type and marks. Never pure white — bone is aged, ancient-future.</div>
-        </div>
-      </div>
-      <div class="sw">
-        <div class="chip c-chrome"></div>
-        <div class="meta">
-          <div class="nm">Chrome</div>
-          <div class="hx">#C9C9CE &rarr; gradient</div>
-          <div class="use">The gleam. Reserved for the objects themselves and one highlight per composition.</div>
-        </div>
-      </div>
-    </div>
-    <div class="rule-line">RULE — IF A DESIGN FEELS LIKE IT NEEDS COLOR, IT NEEDS MORE EMPTINESS INSTEAD.</div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="no">04</span><h2>The Mark</h2></div>
-    <p class="lead">Two masses — one solid, one hollow — <strong>held apart forever</strong>. They never touch; the gap between them is the actual logo. Solid is matter, hollow is meaning. On jewellery it is stamped as a hallmark; in film it is two bodies that never quite meet.</p>
-    <div class="logo-stage">
-      <div class="cellL">
-        <svg width="140" height="64" viewBox="0 0 120 56" aria-hidden="true">
-          <circle cx="34" cy="28" r="17" fill="#E9E6DF"/>
-          <circle cx="86" cy="28" r="17" fill="none" stroke="#E9E6DF" stroke-width="2.5"/>
+<!-- ==================================================== A -->
+<section class="dA">
+  <div class="dir-tag"><span>Direction A — “Vulcan”</span><span>Cinematic Luxury</span></div>
+  <div class="dA-hero">
+    <svg class="dA-seal" width="92" height="92" viewBox="0 0 92 92">
+      <circle cx="46" cy="46" r="43" fill="none" stroke="#C9973F" stroke-width="1.4"/>
+      <circle cx="46" cy="46" r="35" fill="none" stroke="#C9973F" stroke-width=".7" opacity=".6"/>
+      <text x="46" y="57" text-anchor="middle" font-family="Georgia,serif" font-size="30" font-style="italic" fill="#F2EBDD">SM</text>
+    </svg>
+    <h2>The metal is common.<br><em>The meaning is rare.</em></h2>
+    <div class="sub">The Space Between Matter — Fine Objects for Men</div>
+    <svg class="dA-ring" width="240" height="150" viewBox="0 0 240 150">
+      <defs>
+        <linearGradient id="goldA" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#F5D889"/>
+          <stop offset="35%" stop-color="#C9973F"/>
+          <stop offset="60%" stop-color="#7A5416"/>
+          <stop offset="85%" stop-color="#E8C36A"/>
+          <stop offset="100%" stop-color="#9C7220"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="120" cy="78" rx="78" ry="58" fill="none" stroke="url(#goldA)" stroke-width="22"/>
+      <ellipse cx="120" cy="72" rx="78" ry="58" fill="none" stroke="#F8E7B0" stroke-width="2" opacity=".7"/>
+    </svg>
+  </div>
+  <div class="dA-row">
+    <div class="dA-card">
+      <div class="frame">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="55" cy="60" r="34" fill="none" stroke="url(#goldA)" stroke-width="10"/>
+          <rect x="37" y="14" width="36" height="20" rx="4" fill="url(#goldA)"/>
         </svg>
-        <div class="cap">Primary — on Void</div>
       </div>
-      <div class="cellR">
-        <svg width="140" height="64" viewBox="0 0 120 56" aria-hidden="true">
-          <circle cx="34" cy="28" r="17" fill="#0A0B0D"/>
-          <circle cx="86" cy="28" r="17" fill="none" stroke="#0A0B0D" stroke-width="2.5"/>
+      <div class="nm">The Signet</div><div class="pr">₹ 2,400</div>
+    </div>
+    <div class="dA-card">
+      <div class="frame">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <path d="M55 10 L55 30" stroke="url(#goldA)" stroke-width="4"/>
+          <ellipse cx="55" cy="62" rx="26" ry="34" fill="none" stroke="url(#goldA)" stroke-width="8"/>
         </svg>
-        <div class="cap">Reversed — on Bone</div>
       </div>
-      <div class="cellL" style="border-top:1px solid var(--hair)">
-        <div class="lockup">The Sp&Lambda;ce<br>Between M&Lambda;tter</div>
-        <div class="cap">Wordmark lockup</div>
-      </div>
-      <div class="cellR" style="border-top:1px solid rgba(10,11,13,.14)">
-        <svg width="90" height="90" viewBox="0 0 90 90" aria-hidden="true">
-          <rect x="5" y="5" width="80" height="80" fill="none" stroke="#0A0B0D" stroke-width="2"/>
-          <circle cx="32" cy="45" r="11" fill="#0A0B0D"/>
-          <circle cx="60" cy="45" r="11" fill="none" stroke="#0A0B0D" stroke-width="2"/>
+      <div class="nm">The Cameo</div><div class="pr">₹ 2,900</div>
+    </div>
+    <div class="dA-card">
+      <div class="frame">
+        <svg width="110" height="110" viewBox="0 0 110 110">
+          <circle cx="30" cy="55" r="12" fill="none" stroke="url(#goldA)" stroke-width="7"/>
+          <circle cx="55" cy="62" r="12" fill="none" stroke="url(#goldA)" stroke-width="7"/>
+          <circle cx="80" cy="55" r="12" fill="none" stroke="url(#goldA)" stroke-width="7"/>
         </svg>
-        <div class="cap">Hallmark punch — stamped into metal</div>
+      </div>
+      <div class="nm">The Rope</div><div class="pr">₹ 3,200</div>
+    </div>
+  </div>
+  <div class="dA-meta">
+    <div class="chip"><div class="c" style="background:#141110"></div>Espresso</div>
+    <div class="chip"><div class="c" style="background:#C9973F"></div>Molten</div>
+    <div class="chip"><div class="c" style="background:#F2EBDD"></div>Cream</div>
+    <div class="chip"><div class="c" style="background:#7A5416"></div>Shadow</div>
+  </div>
+</section>
+
+<!-- ==================================================== B -->
+<section class="dB">
+  <div class="dir-tag"><span>Direction B — “Static”</span><span>Streetwear Heat</span></div>
+  <div class="dB-hero">
+    <div class="dB-stamp">TSBM® — NOT PRECIOUS</div>
+    <h2>
+      <span class="hollow">SPACE</span><br>
+      BETWEEN<br>
+      <span class="red">MATTER</span>
+    </h2>
+    <div class="bar">
+      <span>EST. 2026</span><span class="dotline"></span><span>BOMBAY → WORLDWIDE</span><span class="dotline"></span><span>DROP 001</span>
+    </div>
+  </div>
+  <div class="dB-marquee" aria-hidden="true">
+    <span class="track">HEAVY METAL FOR LIGHT WALLETS — NOT GOLD, DOESN'T MATTER — HEAVY METAL FOR LIGHT WALLETS — NOT GOLD, DOESN'T MATTER — </span><span class="track">HEAVY METAL FOR LIGHT WALLETS — NOT GOLD, DOESN'T MATTER — HEAVY METAL FOR LIGHT WALLETS — NOT GOLD, DOESN'T MATTER — </span>
+  </div>
+  <div class="dB-row">
+    <div class="dB-card">
+      <svg width="120" height="110" viewBox="0 0 120 110">
+        <circle cx="60" cy="58" r="34" fill="none" stroke="#0D0D0D" stroke-width="12"/>
+        <rect x="40" y="12" width="40" height="20" fill="#0D0D0D"/>
+      </svg>
+      <div class="nm">Knuckle 01</div><div class="pr">₹1,199</div><div class="tag">IN STOCK</div>
+    </div>
+    <div class="dB-card">
+      <svg width="120" height="110" viewBox="0 0 120 110">
+        <path d="M60 8 L60 26" stroke="#0D0D0D" stroke-width="6"/>
+        <path d="M70 26 L40 62 L58 62 L48 100 L82 54 L62 54 L72 26 Z" fill="#FF3B1F" stroke="#0D0D0D" stroke-width="5"/>
+      </svg>
+      <div class="nm">Volt Drop</div><div class="pr">₹999</div><div class="tag">RESTOCK</div>
+    </div>
+    <div class="dB-card">
+      <svg width="120" height="110" viewBox="0 0 120 110">
+        <circle cx="28" cy="55" r="13" fill="none" stroke="#0D0D0D" stroke-width="9"/>
+        <circle cx="60" cy="62" r="13" fill="none" stroke="#0D0D0D" stroke-width="9"/>
+        <circle cx="92" cy="55" r="13" fill="none" stroke="#0D0D0D" stroke-width="9"/>
+      </svg>
+      <div class="nm">Cuban Zero</div><div class="pr">₹1,799</div><div class="tag">SELLING FAST</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================================================== C -->
+<section class="dC">
+  <div class="dir-tag"><span>Direction C — “Atelier”</span><span>Modern Luxury E-com</span></div>
+  <div class="dC-hero">
+    <div class="copy">
+      <div class="lg">Space <span>/</span> Between <span>/</span> Matter</div>
+      <h2>Everyday metal,<br>honestly made.</h2>
+      <p>Rings, chains and pendants in solid brass and steel alloys, plated to last. Designed in Bombay. Priced like they should be.</p>
+      <div class="dC-cta">
+        <button class="btn">Shop the objects</button>
+        <button class="btn ghost">Our materials</button>
       </div>
     </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="no">05</span><h2>Letters With Gaps</h2></div>
-    <p class="lead">Headlines are set in a clean tracked-out grotesk — with one anomaly: <strong>every A loses its crossbar</strong>, set as a lambda. A letter with the bridge removed: a gap inside the alphabet itself. Subtle enough to whisper, strange enough to be recognized anywhere.</p>
-    <div class="type-demo">
-      <div class="big">M&Lambda;TTER<br>IS &Lambda; RUMOR</div>
-      <div class="note">HEADLINES — CAPS · TRACKING +220 · A &rarr; &Lambda; ALWAYS<br>BODY — LIGHT WEIGHT · SENTENCE CASE · MAX 65CH<br>DATA — MONOSPACE · FOR PRICES, ALLOYS, FRAME-TAGS</div>
+    <div class="visual">
+      <svg width="220" height="220" viewBox="0 0 220 220">
+        <defs>
+          <linearGradient id="silvC" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#FDFDFD"/>
+            <stop offset="45%" stop-color="#B9B9BD"/>
+            <stop offset="60%" stop-color="#8F8F94"/>
+            <stop offset="100%" stop-color="#E8E8EA"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="110" cy="130" rx="70" ry="18" fill="rgba(42,39,36,.08)"/>
+        <circle cx="110" cy="95" r="52" fill="none" stroke="url(#silvC)" stroke-width="18"/>
+      </svg>
     </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><span class="no">06</span><h2>What He Feels Like</h2></div>
-    <p class="lead">Three materials, one hierarchy. <strong>Matte black is the ground</strong> — boxes, bags, backdrops, light-absorbing. <strong>Mirror chrome is the single gleam</strong> — the object itself, the only thing allowed to shine. And where surfaces meet, <strong>raw collides with refined</strong>: rough cast textures against machined edges, the transformation from ore to object left deliberately visible. The magic trick, mid-reveal.</p>
-    <div class="kv">
-      <div class="cell"><div class="k">Ground</div><div class="v">Matte void — absorbs light, 80% of everything</div></div>
-      <div class="cell"><div class="k">Gleam</div><div class="v">Mirror chrome — one polished element per composition</div></div>
-      <div class="cell"><div class="k">Story</div><div class="v">Raw cast meets machined edge — transformation left visible</div></div>
+  </div>
+  <div class="dC-row">
+    <div class="dC-card">
+      <div class="ph">
+        <svg width="120" height="110" viewBox="0 0 120 110">
+          <ellipse cx="60" cy="88" rx="42" ry="9" fill="rgba(42,39,36,.07)"/>
+          <circle cx="60" cy="52" r="30" fill="none" stroke="url(#silvC)" stroke-width="11"/>
+        </svg>
+      </div>
+      <div class="info">
+        <div class="nm">Band Ring 01</div>
+        <div class="ds">Steel alloy · rhodium tone</div>
+        <div class="pr">₹1,450</div>
+      </div>
     </div>
-  </section>
+    <div class="dC-card">
+      <div class="ph">
+        <svg width="120" height="110" viewBox="0 0 120 110">
+          <ellipse cx="60" cy="92" rx="40" ry="8" fill="rgba(42,39,36,.07)"/>
+          <path d="M60 10 L60 26" stroke="url(#silvC)" stroke-width="5"/>
+          <rect x="42" y="26" width="36" height="54" rx="9" fill="url(#silvC)"/>
+        </svg>
+      </div>
+      <div class="info">
+        <div class="nm">Tag Pendant</div>
+        <div class="ds">Brass core · chrome plate</div>
+        <div class="pr">₹1,250</div>
+      </div>
+    </div>
+    <div class="dC-card">
+      <div class="ph">
+        <svg width="120" height="110" viewBox="0 0 120 110">
+          <ellipse cx="60" cy="90" rx="44" ry="8" fill="rgba(42,39,36,.07)"/>
+          <circle cx="32" cy="52" r="11" fill="none" stroke="url(#silvC)" stroke-width="7"/>
+          <circle cx="60" cy="58" r="11" fill="none" stroke="url(#silvC)" stroke-width="7"/>
+          <circle cx="88" cy="52" r="11" fill="none" stroke="url(#silvC)" stroke-width="7"/>
+        </svg>
+      </div>
+      <div class="info">
+        <div class="nm">Curb Chain 3mm</div>
+        <div class="ds">Steel alloy · anti-tarnish</div>
+        <div class="pr">₹1,690</div>
+      </div>
+    </div>
+  </div>
+  <div class="dC-strip">Free shipping over ₹999 · 6-month plating warranty · 10,000+ orders</div>
+</section>
 
-</div>
-
-<footer>
-  <svg width="96" height="46" viewBox="0 0 120 56" aria-hidden="true">
-    <circle cx="34" cy="28" r="17" fill="#E9E6DF"/>
-    <circle cx="86" cy="28" r="17" fill="none" stroke="#E9E6DF" stroke-width="2.5"/>
-  </svg>
-  <p class="essence">A cold magician with magnetic gravity,<br>who whispers, and dares you.</p>
-  <div class="sig micro">Nothing is precious. Everything can be.</div>
+<footer class="choose">
+  <h3>Which world does the brand live in?</h3>
+  <p>A — Vulcan · cinematic luxury&nbsp;&nbsp;&nbsp;B — Static · streetwear heat&nbsp;&nbsp;&nbsp;C — Atelier · modern e-com<br>Tell me A, B, or C (or what to steal from each) and I rebuild the entire site in that world.</p>
+  <div class="opts">
+    <div class="opt">A — Vulcan</div>
+    <div class="opt">B — Static</div>
+    <div class="opt">C — Atelier</div>
+  </div>
 </footer>
 
 </html>
