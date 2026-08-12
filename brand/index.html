@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TSBM — Brand Personality</title>
+<style>
+  :root{
+    --void:#0A0B0D;
+    --bone:#E9E6DF;
+    --chrome:#C9C9CE;
+    --dim:rgba(233,230,223,.5);
+    --hair:rgba(233,230,223,.14);
+    --utility:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:Menlo,Consolas,"SF Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{
+    background:var(--void);
+    color:var(--bone);
+    font-family:var(--utility);
+    -webkit-font-smoothing:antialiased;
+  }
+  .micro{font-size:10px;letter-spacing:.34em;text-transform:uppercase;font-weight:500}
+  .page{max-width:860px;margin:0 auto;padding:0 28px}
+
+  header.masthead{
+    text-align:center;
+    padding:14vh 28px 10vh;
+    border-bottom:1px solid var(--hair);
+  }
+  .gap-symbol{margin:0 auto 44px;display:block}
+  h1.wordmark{
+    font-size:clamp(26px,4.6vw,44px);
+    font-weight:700;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    line-height:1.7;
+    text-wrap:balance;
+  }
+  .masthead .sub{margin-top:26px;color:var(--dim)}
+
+  section{padding:9vh 0;border-bottom:1px solid var(--hair)}
+  .sec-head{
+    display:flex;align-items:baseline;gap:18px;
+    margin-bottom:44px;
+  }
+  .sec-head .no{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.2em}
+  .sec-head h2{
+    font-size:13px;letter-spacing:.4em;text-transform:uppercase;font-weight:700;
+  }
+  p.lead{
+    font-size:clamp(16px,1.9vw,20px);
+    line-height:1.8;font-weight:300;color:#CFCCC5;
+    max-width:58ch;
+  }
+  p.lead strong{color:var(--bone);font-weight:600}
+  .kv{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:1px;
+    background:var(--hair);
+    border:1px solid var(--hair);
+    margin-top:40px;
+  }
+  .kv .cell{background:var(--void);padding:26px 22px}
+  .kv .k{font-family:var(--mono);font-size:10px;letter-spacing:.22em;color:var(--dim);text-transform:uppercase;margin-bottom:12px}
+  .kv .v{font-size:15px;line-height:1.55;font-weight:300}
+  .kv .v em{font-style:normal;color:var(--chrome)}
+
+  /* voice samples */
+  .voice-demo{
+    margin-top:40px;
+    border:1px solid var(--hair);
+    padding:54px 30px;
+    text-align:center;
+  }
+  .voice-demo .obj{font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--dim);margin-bottom:34px}
+  .voice-demo .line{font-size:clamp(16px,2vw,21px);font-weight:300;letter-spacing:.04em;line-height:2}
+  .voice-demo .price{margin-top:34px;font-family:var(--mono);font-size:11px;letter-spacing:.28em;color:var(--dim)}
+  .lex{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:40px}
+  .lex .col{background:var(--void);padding:26px 22px}
+  .lex ul{list-style:none;margin-top:14px}
+  .lex li{font-size:14px;font-weight:300;padding:7px 0;border-bottom:1px dashed var(--hair)}
+  .lex li:last-child{border:none}
+  .lex .never li{color:var(--dim);text-decoration:line-through;text-decoration-color:rgba(233,230,223,.4)}
+
+  /* palette */
+  .swatches{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--hair);border:1px solid var(--hair);margin-top:40px}
+  .sw{background:var(--void);padding:0}
+  .sw .chip{height:130px}
+  .sw .meta{padding:18px 20px}
+  .sw .nm{font-size:12px;letter-spacing:.24em;text-transform:uppercase;font-weight:700}
+  .sw .hx{font-family:var(--mono);font-size:11px;color:var(--dim);margin-top:8px;letter-spacing:.14em}
+  .sw .use{font-size:12px;font-weight:300;color:var(--dim);margin-top:10px;line-height:1.6}
+  .chip.c-void{background:#0A0B0D;border-bottom:1px solid var(--hair)}
+  .chip.c-bone{background:#E9E6DF}
+  .chip.c-chrome{background:linear-gradient(135deg,#F4F4F8 0%,#9a9aa2 40%,#5E5E66 55%,#E6E6EC 75%,#8E8E97 100%)}
+  .rule-line{margin-top:26px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--dim);line-height:2}
+
+  /* logo section */
+  .logo-stage{
+    margin-top:40px;
+    border:1px solid var(--hair);
+    display:grid;
+    grid-template-columns:1fr 1fr;
+  }
+  .logo-stage .cellL{padding:64px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;border-right:1px solid var(--hair)}
+  .logo-stage .cellR{padding:64px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;background:var(--bone);color:var(--void)}
+  .logo-stage .cap{font-family:var(--mono);font-size:10px;letter-spacing:.26em;text-transform:uppercase;opacity:.55}
+  .lockup{
+    font-size:15px;font-weight:700;letter-spacing:.42em;text-transform:uppercase;
+    text-align:center;line-height:2.1;
+  }
+  @media (max-width:640px){
+    .logo-stage{grid-template-columns:1fr}
+    .logo-stage .cellL{border-right:none;border-bottom:1px solid var(--hair)}
+    .lex{grid-template-columns:1fr}
+    .swatches{grid-template-columns:1fr}
+  }
+
+  /* type section */
+  .type-demo{margin-top:40px;border:1px solid var(--hair);padding:50px 30px;text-align:center}
+  .type-demo .big{
+    font-size:clamp(30px,5.4vw,58px);
+    font-weight:700;letter-spacing:.22em;text-transform:uppercase;line-height:1.5;
+  }
+  .type-demo .note{margin-top:30px;font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--dim);line-height:2}
+
+  footer{padding:10vh 28px 12vh;text-align:center}
+  footer .essence{
+    font-size:clamp(17px,2.2vw,24px);
+    font-weight:300;line-height:1.9;max-width:34ch;margin:0 auto;
+  }
+  footer .sig{margin-top:44px;color:var(--dim)}
+</style>
+
+<header class="masthead">
+  <!-- the gap symbol: two masses that never touch -->
+  <svg class="gap-symbol" width="120" height="56" viewBox="0 0 120 56" aria-label="Logo: two circles almost touching">
+    <circle cx="34" cy="28" r="17" fill="#E9E6DF"/>
+    <circle cx="86" cy="28" r="17" fill="none" stroke="#E9E6DF" stroke-width="2.5"/>
+  </svg>
+  <h1 class="wordmark">The Sp&Lambda;ce<br>Between<br>M&Lambda;tter</h1>
+  <div class="sub micro">Brand Personality &mdash; Working Document 01 &mdash; MMXXVI</div>
+</header>
+
+<div class="page">
+
+  <section>
+    <div class="sec-head"><span class="no">01</span><h2>Who He Is</h2></div>
+    <p class="lead">The brand is <strong>a Magician</strong> — he transforms base metal into meaning, the ordinary into the significant. He walks into the room and says almost nothing, yet <strong>the room slowly reorients around him</strong>. He is cold on the surface, mysterious by discipline — he never explains himself fully, and this is precisely why people lean in. And beneath the stillness he is <strong>an instigator</strong>: every object he hands you is a dare. <em>Wear it and start something.</em></p>
+    <div class="kv">
+      <div class="cell"><div class="k">Archetype</div><div class="v">The Magician <em>— transformation as power</em></div></div>
+      <div class="cell"><div class="k">Presence</div><div class="v">Magnetic center <em>— gravity, not volume</em></div></div>
+      <div class="cell"><div class="k">Temperature</div><div class="v">Cold &amp; mysterious <em>— never fully explained</em></div></div>
+      <div class="cell"><div class="k">Stance toward you</div><div class="v">The instigator <em>— objects as dares</em></div></div>
+      <div class="cell"><div class="k">Era</div><div class="v">Ancient-future <em>— relic and laboratory at once; never trendy</em></div></div>
+      <div class="cell"><div class="k">Never</div><div class="v">Loud, needy, apologetic, nostalgic, "on trend"</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="no">02</span><h2>How He Speaks</h2></div>
+    <p class="lead"><strong>The whisper.</strong> Minimal words surrounded by silence — because a brand about the space between matter speaks mostly in space. Short declaratives. No exclamation marks, ever. The provocation lives inside quiet sentences, not loud ones.</p>
+    <div class="voice-demo">
+      <div class="obj">OBJECT 02 — PENDANT</div>
+      <div class="line">Zinc alloy. Chrome plate.<br>The rest is up to you.</div>
+      <div class="price">₹1,499 — ADD</div>
+    </div>
+    <div class="lex">
+      <div class="col">
+        <div class="micro">Words we use</div>
+        <ul>
+          <li>object &nbsp;<span style="opacity:.45">(never "piece")</span></li>
+          <li>vessel · vault · keeper</li>
+          <li>honest alloy · plate · cast · blackened</li>
+          <li>the gap · the interval · the space</li>
+          <li>meaning · matter · mass</li>
+        </ul>
+      </div>
+      <div class="col never">
+        <div class="micro">Words we never use</div>
+        <ul>
+          <li>bling · swag · drip</li>
+          <li>luxury (we imply it)</li>
+          <li>imitation · fake-gold finish</li>
+          <li>sale!! · hurry · last chance</li>
+          <li>premium quality</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="no">03</span><h2>Color</h2></div>
+    <p class="lead"><strong>Pure monochrome. No accent. Ever.</strong> Three non-colors, disciplined absolutely — because color is noise, and the brand is a whisper. When people see uninterrupted black, bone, and chrome, they should know whose room they're standing in.</p>
+    <div class="swatches">
+      <div class="sw">
+        <div class="chip c-void"></div>
+        <div class="meta">
+          <div class="nm">Void</div>
+          <div class="hx">#0A0B0D</div>
+          <div class="use">The ground. 80% of every surface — packaging, site, film. Matte, light-absorbing.</div>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="chip c-bone"></div>
+        <div class="meta">
+          <div class="nm">Bone</div>
+          <div class="hx">#E9E6DF</div>
+          <div class="use">The voice. All type and marks. Never pure white — bone is aged, ancient-future.</div>
+        </div>
+      </div>
+      <div class="sw">
+        <div class="chip c-chrome"></div>
+        <div class="meta">
+          <div class="nm">Chrome</div>
+          <div class="hx">#C9C9CE &rarr; gradient</div>
+          <div class="use">The gleam. Reserved for the objects themselves and one highlight per composition.</div>
+        </div>
+      </div>
+    </div>
+    <div class="rule-line">RULE — IF A DESIGN FEELS LIKE IT NEEDS COLOR, IT NEEDS MORE EMPTINESS INSTEAD.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="no">04</span><h2>The Mark</h2></div>
+    <p class="lead">Two masses — one solid, one hollow — <strong>held apart forever</strong>. They never touch; the gap between them is the actual logo. Solid is matter, hollow is meaning. On jewellery it is stamped as a hallmark; in film it is two bodies that never quite meet.</p>
+    <div class="logo-stage">
+      <div class="cellL">
+        <svg width="140" height="64" viewBox="0 0 120 56" aria-hidden="true">
+          <circle cx="34" cy="28" r="17" fill="#E9E6DF"/>
+          <circle cx="86" cy="28" r="17" fill="none" stroke="#E9E6DF" stroke-width="2.5"/>
+        </svg>
+        <div class="cap">Primary — on Void</div>
+      </div>
+      <div class="cellR">
+        <svg width="140" height="64" viewBox="0 0 120 56" aria-hidden="true">
+          <circle cx="34" cy="28" r="17" fill="#0A0B0D"/>
+          <circle cx="86" cy="28" r="17" fill="none" stroke="#0A0B0D" stroke-width="2.5"/>
+        </svg>
+        <div class="cap">Reversed — on Bone</div>
+      </div>
+      <div class="cellL" style="border-top:1px solid var(--hair)">
+        <div class="lockup">The Sp&Lambda;ce<br>Between M&Lambda;tter</div>
+        <div class="cap">Wordmark lockup</div>
+      </div>
+      <div class="cellR" style="border-top:1px solid rgba(10,11,13,.14)">
+        <svg width="90" height="90" viewBox="0 0 90 90" aria-hidden="true">
+          <rect x="5" y="5" width="80" height="80" fill="none" stroke="#0A0B0D" stroke-width="2"/>
+          <circle cx="32" cy="45" r="11" fill="#0A0B0D"/>
+          <circle cx="60" cy="45" r="11" fill="none" stroke="#0A0B0D" stroke-width="2"/>
+        </svg>
+        <div class="cap">Hallmark punch — stamped into metal</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="no">05</span><h2>Letters With Gaps</h2></div>
+    <p class="lead">Headlines are set in a clean tracked-out grotesk — with one anomaly: <strong>every A loses its crossbar</strong>, set as a lambda. A letter with the bridge removed: a gap inside the alphabet itself. Subtle enough to whisper, strange enough to be recognized anywhere.</p>
+    <div class="type-demo">
+      <div class="big">M&Lambda;TTER<br>IS &Lambda; RUMOR</div>
+      <div class="note">HEADLINES — CAPS · TRACKING +220 · A &rarr; &Lambda; ALWAYS<br>BODY — LIGHT WEIGHT · SENTENCE CASE · MAX 65CH<br>DATA — MONOSPACE · FOR PRICES, ALLOYS, FRAME-TAGS</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="no">06</span><h2>What He Feels Like</h2></div>
+    <p class="lead">Three materials, one hierarchy. <strong>Matte black is the ground</strong> — boxes, bags, backdrops, light-absorbing. <strong>Mirror chrome is the single gleam</strong> — the object itself, the only thing allowed to shine. And where surfaces meet, <strong>raw collides with refined</strong>: rough cast textures against machined edges, the transformation from ore to object left deliberately visible. The magic trick, mid-reveal.</p>
+    <div class="kv">
+      <div class="cell"><div class="k">Ground</div><div class="v">Matte void — absorbs light, 80% of everything</div></div>
+      <div class="cell"><div class="k">Gleam</div><div class="v">Mirror chrome — one polished element per composition</div></div>
+      <div class="cell"><div class="k">Story</div><div class="v">Raw cast meets machined edge — transformation left visible</div></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <svg width="96" height="46" viewBox="0 0 120 56" aria-hidden="true">
+    <circle cx="34" cy="28" r="17" fill="#E9E6DF"/>
+    <circle cx="86" cy="28" r="17" fill="none" stroke="#E9E6DF" stroke-width="2.5"/>
+  </svg>
+  <p class="essence">A cold magician with magnetic gravity,<br>who whispers, and dares you.</p>
+  <div class="sig micro">Nothing is precious. Everything can be.</div>
+</footer>
+
+</html>
