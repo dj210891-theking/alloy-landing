@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>THE SPACE BETWEEN MATTER</title>
+<style>
+  :root{
+    --bg:#0A0B0D;
+    --bone:#E9E6DF;
+    --chrome-hi:#F7F7FA;
+    --chrome-lo:#6E6E76;
+    --dim:rgba(233,230,223,.55);
+    --utility:"Helvetica Neue",Helvetica,Arial,sans-serif;
+    --mono:Menlo,Consolas,"SF Mono",monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--bone);
+    font-family:var(--utility);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .micro{font-size:10px;letter-spacing:.34em;text-transform:uppercase;font-weight:500}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:20;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:20px 28px;
+    mix-blend-mode:difference;
+  }
+  .topbar .brand{font-size:11px;letter-spacing:.42em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+  .topbar .note{opacity:.6}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    height:100vh;
+    min-height:640px;
+    overflow:hidden;
+  }
+  .hero svg.scene{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+  }
+  .hero .headline{
+    position:absolute;
+    left:0;right:0;
+    bottom:9vh;
+    text-align:center;
+    z-index:10;
+    padding:0 20px;
+    pointer-events:none;
+  }
+  .hero h1{
+    font-weight:900;
+    font-size:clamp(34px,6.2vw,92px);
+    letter-spacing:.02em;
+    line-height:.98;
+    text-transform:uppercase;
+    text-wrap:balance;
+    text-shadow:0 2px 30px rgba(0,0,0,.8);
+  }
+  .hero .sub{
+    margin-top:16px;
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--dim);
+    line-height:2;
+  }
+  .frame-tag{
+    position:absolute;
+    top:86px;left:28px;
+    font-family:var(--mono);
+    font-size:10px;letter-spacing:.22em;
+    color:var(--dim);
+    z-index:10;
+  }
+  .scroll-cue{
+    position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+    z-index:10;color:var(--dim);
+  }
+
+  /* load choreography + slow-mo drift */
+  @media (prefers-reduced-motion:no-preference){
+    .hero svg.scene{animation:fadein 1.6s ease both}
+    .hero h1{animation:rise 1s .3s cubic-bezier(.2,.7,.2,1) both}
+    .hero .sub{animation:rise 1s .55s cubic-bezier(.2,.7,.2,1) both}
+    @keyframes fadein{from{opacity:0}to{opacity:1}}
+    @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+
+    .float-slow{animation:floaty 7s ease-in-out infinite alternate}
+    .float-slower{animation:floaty 9s ease-in-out infinite alternate-reverse}
+    @keyframes floaty{from{transform:translateY(0)}to{transform:translateY(-9px)}}
+    .breathe{animation:breathe 5s ease-in-out infinite alternate;transform-origin:center}
+    @keyframes breathe{from{opacity:.85}to{opacity:1}}
+    .glint{animation:glint 4s ease-in-out infinite}
+    @keyframes glint{0%,72%,100%{opacity:0}80%{opacity:.95}88%{opacity:0}}
+    .drift{animation:drift 11s linear infinite alternate}
+    @keyframes drift{from{transform:translate(0,0)}to{transform:translate(14px,-10px)}}
+  }
+
+  /* ---------- manifesto ---------- */
+  .manifesto{
+    max-width:640px;
+    margin:0 auto;
+    padding:16vh 24px 10vh;
+    text-align:center;
+  }
+  .manifesto .eyebrow{color:var(--dim);margin-bottom:38px}
+  .manifesto p{
+    font-size:clamp(17px,2vw,22px);
+    line-height:1.75;
+    font-weight:300;
+    color:#CFCCC5;
+    margin-bottom:1.6em;
+  }
+  .manifesto p strong{color:var(--bone);font-weight:600}
+  .manifesto .sig{
+    margin-top:52px;
+    font-size:11px;letter-spacing:.42em;text-transform:uppercase;
+    color:var(--dim);
+  }
+  .houses-tease{
+    text-align:center;
+    padding:0 24px 14vh;
+    color:var(--dim);
+  }
+  footer{
+    padding:26px;
+    text-align:center;
+    border-top:1px solid rgba(233,230,223,.08);
+  }
+  footer span{opacity:.4}
+</style>
+
+<header class="topbar">
+  <div class="brand">The Space Between Matter</div>
+  <div class="micro note">Objects for Men — MMXXVI</div>
+</header>
+
+<section class="hero" aria-label="Two figures frozen mid-fight; a ring on the striking fist and a chain suspended in the air">
+  <div class="frame-tag">FRAME 0.008 s&nbsp;&nbsp;·&nbsp;&nbsp;SHUTTER 1/8000&nbsp;&nbsp;·&nbsp;&nbsp;THE HIT NEVER LANDS</div>
+
+  <svg class="scene" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="img" aria-hidden="true">
+    <defs>
+      <!-- grounds & atmosphere -->
+      <radialGradient id="bgGrad" cx="52%" cy="42%" r="75%">
+        <stop offset="0%" stop-color="#1B1D21"/>
+        <stop offset="55%" stop-color="#101114"/>
+        <stop offset="100%" stop-color="#07080A"/>
+      </radialGradient>
+      <!-- skin: striker (deep umber) -->
+      <linearGradient id="skinA" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#8A5A3B"/>
+        <stop offset="55%" stop-color="#5E3A25"/>
+        <stop offset="100%" stop-color="#3A2417"/>
+      </linearGradient>
+      <linearGradient id="skinAHi" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D9A277"/>
+        <stop offset="100%" stop-color="#8A5A3B"/>
+      </linearGradient>
+      <!-- skin: defender (warm tan) -->
+      <linearGradient id="skinB" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#C99368"/>
+        <stop offset="60%" stop-color="#8F6242"/>
+        <stop offset="100%" stop-color="#5C3D28"/>
+      </linearGradient>
+      <!-- garments -->
+      <linearGradient id="cloth" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#232529"/>
+        <stop offset="100%" stop-color="#0D0E10"/>
+      </linearGradient>
+      <!-- chrome -->
+      <linearGradient id="chrome" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FBFBFD"/>
+        <stop offset="28%" stop-color="#B9B9C2"/>
+        <stop offset="50%" stop-color="#5E5E66"/>
+        <stop offset="72%" stop-color="#E6E6EC"/>
+        <stop offset="100%" stop-color="#8E8E97"/>
+      </linearGradient>
+      <linearGradient id="chromeV" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#F4F4F8"/>
+        <stop offset="45%" stop-color="#77777F"/>
+        <stop offset="60%" stop-color="#2E2E33"/>
+        <stop offset="100%" stop-color="#D8D8DF"/>
+      </linearGradient>
+      <radialGradient id="smoke" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#3A3D44" stop-opacity=".55"/>
+        <stop offset="100%" stop-color="#3A3D44" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="streak" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#E9E6DF" stop-opacity="0"/>
+        <stop offset="70%" stop-color="#E9E6DF" stop-opacity=".55"/>
+        <stop offset="100%" stop-color="#E9E6DF" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="flare" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#9FC4FF" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#DCEBFF" stop-opacity=".8"/>
+        <stop offset="100%" stop-color="#9FC4FF" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="blur1"><feGaussianBlur stdDeviation="1.1"/></filter>
+      <filter id="blur3"><feGaussianBlur stdDeviation="3"/></filter>
+      <filter id="blur8"><feGaussianBlur stdDeviation="8"/></filter>
+      <filter id="blur16"><feGaussianBlur stdDeviation="16"/></filter>
+      <filter id="grain">
+        <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="n"/>
+        <feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .06 0"/>
+        <feComposite operator="over" in2="SourceGraphic"/>
+      </filter>
+    </defs>
+
+    <!-- ground -->
+    <rect width="1600" height="900" fill="url(#bgGrad)"/>
+    <ellipse cx="450" cy="820" rx="700" ry="220" fill="url(#smoke)" filter="url(#blur16)"/>
+    <ellipse cx="1250" cy="180" rx="600" ry="200" fill="url(#smoke)" filter="url(#blur16)" opacity=".6"/>
+
+    <!-- ==================== STRIKER (left, from behind) ==================== -->
+    <g>
+      <!-- torso, back to camera -->
+      <path d="M-40 900 L-40 560 Q60 440 190 430 Q330 424 400 500 L430 620 Q300 700 250 900 Z" fill="url(#cloth)"/>
+      <!-- rim light on shoulder -->
+      <path d="M-40 566 Q60 446 190 436 Q300 430 372 480" fill="none" stroke="#B9B4A9" stroke-width="3" opacity=".5" filter="url(#blur1)"/>
+      <!-- head, lowered into the punch -->
+      <circle cx="235" cy="382" r="64" fill="#241811"/>
+      <path d="M180 350 A64 64 0 0 1 292 360" fill="none" stroke="#8A5A3B" stroke-width="4" opacity=".55" filter="url(#blur1)"/>
+      <!-- punching arm: shoulder to fist -->
+      <path d="M370 500 L820 440 L822 508 L392 596 Z" fill="url(#skinA)"/>
+      <path d="M372 502 L818 444" stroke="url(#skinAHi)" stroke-width="7" opacity=".65" filter="url(#blur1)"/>
+      <!-- motion streaks trailing the arm -->
+      <g opacity=".5" class="breathe">
+        <rect x="120" y="452" width="560" height="3" fill="url(#streak)" filter="url(#blur3)"/>
+        <rect x="60"  y="486" width="640" height="5" fill="url(#streak)" filter="url(#blur3)" opacity=".7"/>
+        <rect x="180" y="528" width="500" height="3" fill="url(#streak)" filter="url(#blur3)" opacity=".5"/>
+      </g>
+
+      <!-- FIST -->
+      <g transform="translate(820,468) rotate(-8)">
+        <!-- wrist -->
+        <path d="M-60 -28 L10 -34 L14 36 L-58 40 Z" fill="url(#skinA)"/>
+        <!-- palm mass -->
+        <rect x="0" y="-44" width="96" height="86" rx="26" fill="url(#skinA)"/>
+        <!-- knuckles -->
+        <circle cx="30" cy="-40" r="15" fill="url(#skinAHi)"/>
+        <circle cx="58" cy="-42" r="15" fill="url(#skinAHi)"/>
+        <circle cx="84" cy="-36" r="14" fill="url(#skinAHi)"/>
+        <circle cx="104" cy="-24" r="12" fill="url(#skinAHi)"/>
+        <!-- folded fingers -->
+        <rect x="26" y="-32" width="88" height="24" rx="12" fill="#4A2E1D"/>
+        <rect x="30" y="-8"  width="80" height="22" rx="11" fill="#3C2517"/>
+        <!-- thumb -->
+        <path d="M18 14 Q52 34 92 20 Q60 44 22 34 Z" fill="url(#skinA)"/>
+        <!-- THE RING -->
+        <rect x="46" y="-34" width="17" height="30" rx="5" fill="url(#chromeV)"/>
+        <rect x="44" y="-40" width="21" height="12" rx="4" fill="url(#chrome)"/>
+        <g class="glint">
+          <path d="M54 -46 L57 -38 L65 -35 L57 -32 L54 -24 L51 -32 L43 -35 L51 -38 Z" fill="#FFFFFF"/>
+        </g>
+      </g>
+
+      <!-- impact flare in the gap -->
+      <rect x="700" y="430" width="560" height="2.5" fill="url(#flare)" filter="url(#blur3)" opacity=".8" class="breathe"/>
+      <circle cx="985" cy="432" r="30" fill="#DCEBFF" opacity=".14" filter="url(#blur8)"/>
+    </g>
+
+    <!-- ==================== DEFENDER (right, snapping back) ==================== -->
+    <g filter="url(#blur1)">
+      <!-- ghost echoes of the head (slow-mo trail) -->
+      <circle cx="1128" cy="290" r="58" fill="#B98A63" opacity=".08"/>
+      <circle cx="1156" cy="272" r="58" fill="#B98A63" opacity=".14"/>
+      <!-- torso tilting away -->
+      <path d="M1050 900 Q1040 640 1108 470 L1290 520 Q1330 700 1310 900 Z" fill="url(#cloth)"/>
+      <path d="M1108 474 L1288 522" stroke="#B9B4A9" stroke-width="2.5" opacity=".35"/>
+      <!-- neck -->
+      <path d="M1122 470 L1200 452 L1216 386 L1140 396 Z" fill="url(#skinB)"/>
+      <!-- head thrown back-right -->
+      <g transform="translate(1192,268) rotate(24)">
+        <circle r="62" fill="url(#skinB)"/>
+        <!-- jaw -->
+        <path d="M-58 18 Q-30 66 30 58 L54 30 Q10 52 -44 6 Z" fill="#6B4830"/>
+        <!-- impact-side cheek highlight -->
+        <path d="M-58 -8 A62 62 0 0 1 -12 -60" fill="none" stroke="#EFC49A" stroke-width="6" opacity=".8" filter="url(#blur1)"/>
+        <!-- ear hint -->
+        <circle cx="44" cy="6" r="11" fill="#7A5236"/>
+        <!-- hair mass -->
+        <path d="M-6 -62 Q60 -70 66 -8 Q70 -40 40 -66 Q10 -84 -34 -66 Z" fill="#17110C"/>
+      </g>
+      <!-- sweat droplets frozen mid-air -->
+      <g fill="#DCE6EE" class="drift">
+        <circle cx="1268" cy="196" r="5" opacity=".85"/>
+        <circle cx="1300" cy="168" r="3.4" opacity=".7"/>
+        <circle cx="1330" cy="150" r="2.6" opacity=".55"/>
+        <circle cx="1252" cy="150" r="2.6" opacity=".6"/>
+        <circle cx="1360" cy="140" r="2" opacity=".4"/>
+      </g>
+    </g>
+
+    <!-- chain lifted off the neck, pendant at apex — sharp, in focus -->
+    <g class="float-slow">
+      <!-- ghost trail of pendant -->
+      <g opacity=".14" transform="translate(1092,332) rotate(-6)">
+        <rect x="-22" y="-34" width="44" height="68" rx="10" fill="#E9E6DF"/>
+      </g>
+      <g opacity=".26" transform="translate(1076,300) rotate(-15)">
+        <rect x="-22" y="-34" width="44" height="68" rx="10" fill="#E9E6DF"/>
+      </g>
+      <!-- chain links along a lifted arc -->
+      <g fill="none" stroke="url(#chrome)" stroke-width="7">
+        <circle cx="1148" cy="404" r="11"/>
+        <circle cx="1130" cy="382" r="11"/>
+        <circle cx="1114" cy="358" r="11"/>
+        <circle cx="1102" cy="332" r="11"/>
+        <circle cx="1094" cy="305" r="11"/>
+        <circle cx="1160" cy="420" r="11"/>
+        <circle cx="1178" cy="430" r="11"/>
+        <circle cx="1198" cy="434" r="11"/>
+      </g>
+      <!-- THE PENDANT -->
+      <g transform="translate(1062,262) rotate(-24)">
+        <rect x="-24" y="-36" width="48" height="72" rx="11" fill="url(#chromeV)"/>
+        <rect x="-24" y="-36" width="48" height="72" rx="11" fill="none" stroke="#FFFFFF" stroke-width="1.4" opacity=".65"/>
+        <circle cx="0" cy="-26" r="4.5" fill="#0A0B0D"/>
+        <rect x="-13" y="-10" width="26" height="2.6" fill="#26262B"/>
+        <rect x="-13" y="0" width="26" height="2.6" fill="#26262B"/>
+        <rect x="-13" y="10" width="18" height="2.6" fill="#26262B"/>
+        <g class="glint">
+          <path d="M-14 -30 L-11 -22 L-3 -19 L-11 -16 L-14 -8 L-17 -16 L-25 -19 L-17 -22 Z" fill="#FFFFFF"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- dust motes -->
+    <g fill="#E9E6DF" class="drift" opacity=".35">
+      <circle cx="540" cy="240" r="1.6"/><circle cx="760" cy="180" r="1.2"/>
+      <circle cx="920" cy="640" r="1.6"/><circle cx="1420" cy="620" r="1.4"/>
+      <circle cx="380" cy="700" r="1.2"/><circle cx="1480" cy="300" r="1.2"/>
+    </g>
+
+    <!-- ==================== CALLOUT 1 : THE RING ==================== -->
+    <g class="float-slower">
+      <line x1="836" y1="510" x2="620" y2="600" stroke="#E9E6DF" stroke-width="1" opacity=".4"/>
+      <circle cx="560" cy="672" r="132" fill="#0D0E11" stroke="#E9E6DF" stroke-width="1.4"/>
+      <circle cx="560" cy="672" r="132" fill="none" stroke="#E9E6DF" stroke-width="1" opacity=".25" transform="scale(1.045)" transform-origin="560 672"/>
+      <!-- crosshair ticks -->
+      <g stroke="#E9E6DF" stroke-width="1.4" opacity=".7">
+        <line x1="560" y1="536" x2="560" y2="552"/><line x1="560" y1="792" x2="560" y2="808"/>
+        <line x1="424" y1="672" x2="440" y2="672"/><line x1="680" y1="672" x2="696" y2="672"/>
+      </g>
+      <!-- magnified fist + ring -->
+      <g clip-path="circle(130px at 560px 672px)">
+        <g transform="translate(560,690) scale(2.3) translate(-66,-16) rotate(-8)">
+          <rect x="0" y="-44" width="96" height="86" rx="26" fill="url(#skinA)"/>
+          <circle cx="30" cy="-40" r="15" fill="url(#skinAHi)"/>
+          <circle cx="58" cy="-42" r="15" fill="url(#skinAHi)"/>
+          <circle cx="84" cy="-36" r="14" fill="url(#skinAHi)"/>
+          <rect x="26" y="-32" width="88" height="24" rx="12" fill="#4A2E1D"/>
+          <rect x="30" y="-8" width="80" height="22" rx="11" fill="#3C2517"/>
+          <rect x="46" y="-34" width="17" height="30" rx="5" fill="url(#chromeV)"/>
+          <rect x="44" y="-40" width="21" height="12" rx="4" fill="url(#chrome)"/>
+        </g>
+      </g>
+      <text x="560" y="836" text-anchor="middle" fill="#E9E6DF" font-family="Menlo,monospace" font-size="11" letter-spacing="3" opacity=".8">OBJECT 01 — THE SIGNET</text>
+    </g>
+
+    <!-- ==================== CALLOUT 2 : THE PENDANT ==================== -->
+    <g class="float-slow">
+      <line x1="1094" y1="262" x2="1310" y2="220" stroke="#E9E6DF" stroke-width="1" opacity=".4"/>
+      <circle cx="1408" cy="210" r="118" fill="#0D0E11" stroke="#E9E6DF" stroke-width="1.4"/>
+      <g stroke="#E9E6DF" stroke-width="1.4" opacity=".7">
+        <line x1="1408" y1="88" x2="1408" y2="102"/><line x1="1408" y1="318" x2="1408" y2="332"/>
+        <line x1="1286" y1="210" x2="1300" y2="210"/><line x1="1516" y1="210" x2="1530" y2="210"/>
+      </g>
+      <g clip-path="circle(116px at 1408px 210px)">
+        <g transform="translate(1408,210) scale(2.5) rotate(-24)">
+          <rect x="-24" y="-36" width="48" height="72" rx="11" fill="url(#chromeV)"/>
+          <rect x="-24" y="-36" width="48" height="72" rx="11" fill="none" stroke="#FFFFFF" stroke-width="1" opacity=".6"/>
+          <circle cx="0" cy="-26" r="4.5" fill="#0A0B0D"/>
+          <rect x="-13" y="-10" width="26" height="2.4" fill="#26262B"/>
+          <rect x="-13" y="0" width="26" height="2.4" fill="#26262B"/>
+          <rect x="-13" y="10" width="18" height="2.4" fill="#26262B"/>
+        </g>
+      </g>
+      <text x="1408" y="358" text-anchor="middle" fill="#E9E6DF" font-family="Menlo,monospace" font-size="11" letter-spacing="3" opacity=".8">OBJECT 02 — THE PENDANT</text>
+    </g>
+
+    <!-- film grain + vignette -->
+    <rect width="1600" height="900" filter="url(#grain)" opacity=".5" fill="transparent"/>
+    <rect width="1600" height="900" fill="url(#bgGrad)" opacity="0"/>
+    <rect width="1600" height="900" fill="black" opacity=".22" style="mix-blend-mode:multiply"/>
+  </svg>
+
+  <div class="headline">
+    <h1>The Space<br>Between Matter</h1>
+    <div class="sub">No two atoms ever touch. Even a blow is delivered across a gap.<br>Meaning crosses it anyway.</div>
+  </div>
+
+  <div class="scroll-cue micro">scroll</div>
+</section>
+
+<section class="manifesto">
+  <div class="micro eyebrow">Manifesto</div>
+  <p>Look closely at gold. Closer. Past the shine, down to the atom — and you'll find <strong>almost nothing there</strong>. Matter is a rumor. Every solid thing you have ever held is mostly empty space, held in shape by forces you cannot see.</p>
+  <p>And yet a ring can end a feud. A chain can carry a grandfather through three generations. A pendant can make a stranger understand exactly who you are before you speak.</p>
+  <p>None of that lives in the metal. It lives in <strong>the space between</strong> — between the atoms, between the giver and the given, between who you are and who you are becoming.</p>
+  <p><strong>We make objects for that space.</strong> We will not lie to you about carats. We work in honest alloys — plated, cast, blackened — because the metal was always just the vessel. What you wear is not a store of value. It is a store of meaning, and meaning is the only material that appreciates every time it is worn.</p>
+  <div class="sig">Nothing is precious. Everything can be.</div>
+</section>
+
+<div class="houses-tease micro">The objects arrive in three houses — soon.</div>
+
+<footer><span class="micro">The Space Between Matter — MMXXVI — nickel-free honest alloys</span></footer>
+
+</html>
